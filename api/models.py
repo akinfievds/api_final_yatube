@@ -2,7 +2,6 @@ import textwrap
 
 from django.contrib.auth import get_user_model
 from django.db import models
-from django.utils.text import slugify
 
 User = get_user_model()
 
@@ -12,16 +11,6 @@ class Group(models.Model):
         max_length=200,
         verbose_name='Название',
     )
-    slug = models.SlugField(
-        unique=True,
-        verbose_name='Ключ для создания URL',
-        null=True
-    )
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.title, allow_unicode=True)
-        super(Group, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title
@@ -85,4 +74,9 @@ class Follow(models.Model):
     )
 
     class Meta():
-        unique_together = ['user', 'following', ]
+        constraints = [
+            models.UniqueConstraint(
+                fields=['user', 'author', ],
+                name='unique_object'
+            ),
+        ]
