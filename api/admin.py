@@ -5,27 +5,27 @@ from api.models import Comment, Follow, Group, Post
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'text', 'group', 'pub_date', 'author',)
-    search_fields = ('text',)
-    list_filter = ('pub_date',)
+    list_display = ('pk', 'text', 'group', 'pub_date', 'author', )
+    search_fields = ('text', )
+    list_filter = ('pub_date', )
     empty_value_display = '-empty-'
 
 
 @admin.register(Group)
 class GroupAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'title', 'slug',)
-    search_fields = ('title', 'slug',)
+    list_display = ('pk', 'title', )
+    search_fields = ('title', )
     empty_value_display = '-empty-'
 
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'text', 'author', 'created',)
-    search_fields = ('text',)
+    list_display = ('pk', 'text', 'author', 'created', )
+    search_fields = ('text', )
     empty_value_display = '-empty-'
 
 
 @admin.register(Follow)
 class FollowAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'user', 'following',)
+    list_display = ('pk', 'user', 'following', )
     empty_value_display = '-empty-'
